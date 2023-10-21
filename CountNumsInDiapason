@@ -17,7 +17,7 @@ Spec db '%d', 0
 section '.text' code readable executable
 
 Start:
-       xor ecx, ecx ;Делаем бесконечный цикл
+       xor ecx, ecx ;Делаем очень длинный цикл
        xor ebx, ebx ;Letters cnt
        mov ebx, 1 ;to count from 1 not 0
        mov eax, Hello ;добавляем смещение
@@ -26,21 +26,23 @@ Cycle:
        cmp byte [eax], 0
        je StrEnd
 
-       inc eax
-
        cmp byte [eax], 'a'
-       jge MoreA
+       jae MoreOrEqualA
 
+       inc eax
        loop Cycle
 
-MoreA:
+MoreOrEqualA:
        cmp byte [eax], 'z'
-       jle LessZ
+       jbe LessOrEqualZ
 
+       inc eax
        loop Cycle
 
-LessZ:
+LessOrEqualZ:
        inc ebx
+
+       inc eax
        loop Cycle
 
 StrEnd:
